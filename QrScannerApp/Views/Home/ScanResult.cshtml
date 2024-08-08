@@ -1,0 +1,7 @@
+﻿@{
+    ViewData["Title"] = "Scan Result";
+}
+
+<h1>Scan Result</h1>
+<p>Scanned QR Code: @ViewData["ScannedResult"]</p>
+<a class="btn btn-sm btn-success" href="@Url.Action("QrScanner", "Home")">Scan Another QR Code</a>

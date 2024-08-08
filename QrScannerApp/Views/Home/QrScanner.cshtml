@@ -1,0 +1,33 @@
+﻿@page
+@model QrScannerApp.Models.QrScannerModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Scanner</title>
+</head>
+<body>
+    <p id="result"></p>
+    <div id="reader" style="width: 100%; height: 300px;"></div>
+
+    <script>
+      
+        function onScanSuccess(decodedText, decodedResult) {
+            // Redirect to another view when a QR code is successfully scanned
+            window.location.href = '/Home/ScanResult?result=' + encodeURIComponent(decodedText);
+        }
+
+        function onScanFailure(error) {
+            console.warn(`QR Code scan error: ${error}`);
+        }
+
+        window.onload = function () {
+            const html5QrCode = new Html5Qrcode("reader");
+            const config = { fps: 10, qrbox: { width: 500, height: 500 } };
+            html5QrCode.start({ facingMode: "environment" }, config, onScanSuccess);
+        }
+    </script>
+</body>
+</html>
